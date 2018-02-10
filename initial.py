@@ -5,7 +5,7 @@ class Fighter:
 	def __init__(self):	
 		self.name = "Bob"
 		self.health = 40
-		self.strength = 10
+		self.strength = 15
 		self.defense = 3
 
 	def __setName__(self, n):
@@ -36,6 +36,7 @@ class Fighter:
 		# print('Strength: {str}'.format(str = self.str))
 		# print('Health: {hp}'.format(hp = self.health))
 
+	# add method to check if already dead
 	def __was_hit__(self, e):
 		dmg_taken = e.strength - self.defense
 		self.health -= dmg_taken
@@ -43,12 +44,12 @@ class Fighter:
 
 	def __attack__(self, e):
 		dmg_taken = e.__was_hit__(self)
-		print("{user} attacked {enemy} for {dmg} damage\n{enemy}'s health is now {hp}\n"
+		print("{user} attacked {enemy} for {dmg} damage\n{enemy}: {hp} Health\n"
 			.format(user = self.name, enemy = e.name, dmg = dmg_taken, hp = enemy.health))
 
 current_user = Fighter()
 enemy = Fighter()
-
+enemy.__setStats__(30, 10, 2)
 print (current_user.__dict__)
 
 n = str(input('\nWhat is your name?  '))
