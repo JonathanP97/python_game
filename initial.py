@@ -40,12 +40,16 @@ class Fighter:
 	def __was_hit__(self, e):
 		dmg_taken = e.strength - self.defense
 		self.health -= dmg_taken
+
+		if self.health < 0:
+			self.health = 0
+
 		return dmg_taken
 
 	def __attack__(self, e):
 		dmg_taken = e.__was_hit__(self)
-		print("{user} attacked {enemy} for {dmg} damage\n{enemy}: {hp} Health\n"
-			.format(user = self.name, enemy = e.name, dmg = dmg_taken, hp = enemy.health))
+		print("{user} attacked {ene} for {dmg} damage\n{ene}: {ene_hp} Health\n"
+			.format(user = self.name, ene = e.name, dmg = dmg_taken, ene_hp = e.health))
 
 current_user = Fighter()
 enemy = Fighter()
@@ -57,6 +61,19 @@ n = str(input('\nWhat is your name?  '))
 current_user.__setName__(n)
 
 print(current_user.__dict__)
-while current_user.health > 0 or enemy.health > 0:
+print(enemy.__dict__)
+
+# while current_user.health != 0 or enemy.health != 0:
+
+while True == True: 
 	current_user.__attack__(enemy)
+	if(enemy.health == 0):
+		print('You win!')
+		break
+
 	enemy.__attack__(current_user)
+	if(current_user.health == 0):
+		print('You lost :c')
+		break
+
+
